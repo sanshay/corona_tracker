@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <title>Aarogya Setu</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="/homepage.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700&amp;display=swap" rel="stylesheet">
+    <style>
+    body {
+    background-color: rgb(247,247,249);
+    padding:0;
+    margin:0;
+    }
+    </style>
+  </head>
+  <body>
+    
+    <div class="covidupdateOuterWrapper" id="stats-section">
+      <div class="updatesWrapper">
+        
+        
+        
+        <div class="statusOuterWrapper">
+          
+          
+          
+          
+        </div>
+      </div>
+      <div class="impactedAreaInfoWrap"></div>
+      <div class="impactedAreaOuterWrapper">
+        <p class="impactedAreaheader">COVID-19 Cases Overview</p>
+        <p class="impactupdateTiming">Updated 5 hours, 8 minutes ago. 24 Apr '20</p>
+      </div>
+      <div class="impactedAreaInfoDetail">
+        
+        <div class="countryImpactWrapper">
+          <p class="stateNametxt">Across India</p>
+          <div class="NumberofCaseswrapper">
+            <div class="totalcasesWrap flex1">
+              <p class="totalcasestxt">Confirmed</p>
+              <p class="totalcasesNo redclr">23452</p> <!-- total confirmed -->
+            </div>
+            <div class="totalcasesWrap flex1">
+              <p class="totalcasestxt">Recovered</p>
+              <p class="totalcasesNo lightgreenClr">4814</p> <!-- total recovered -->
+            </div>
+            <div class="totalcasesWrap flex1">
+              <p class="totalcasestxt">Deceased</p> <!-- total deceased -->
+              <p class="totalcasesNo">723</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="statewiseCalculaterWrap">
+        <p class="statecovidHeader">All State/UT Stats</p>
+        <div class="covidstateFilterWrapper">
+          <div class="locationFilter">
+            <p class="ico12 fb blackClr">Location</p>
+          </div>
+          <div class="statColumn"><p class="ico12 fb redclr">Confirmed</p></div>
+          <div class="statColumn dn"><p class="ico12 fb purpleclr">Quarantine</p></div>
+          <div class="statColumn"><p class="ico12 fb lightgreenClr">Recovered</p></div>
+          <div class="statColumn"><p class="ico12 fb blackClr">Deceased</p></div>
+        </div>
+        
+        {% for item in clean_list %}
+          state name : {{ item.4 }} <br>
+          active : {{ item.0 }} <br>
+          confirmed : {{ item.1 }} <br>
+          deaths : {{ item.2 }} <br>
+          recovered : {{ item.3 }} <br>
+          <br>
+        {% endfor %}
+
+        <h1>Total Case</h1>
+        Total active : {{ total_list.0 }}
+        Total confirmed :{{ total_list.1 }}
+        Total deaths : {{ total_list.2 }}
+        Total recovered : {{ total_list.3 }}
+        
+      </div>
+    </div>
+    
+    
+    <script>
+    
+    function onLang() {
+    window.track("type=onLang");
+    window.JSMobileCrm.changeLanguage();
+    }
+    function onShare() {
+    window.track("type=onShare");
+    window.JSMobileCrm.shareApp();
+    }
+    
+    function track(query) {
+    var url = '/track/?path=healthyEn&ios=false&lang=en&Authorization=undefined&pt=9cf23ec2-d83c-4778-aca5-d7fb64ae1b2d&did=&ver=&' + query;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.withCredentials = true;
+    xhr.send();
+    }
+    // document.addEventListener('DOMContentLoaded', () =>{
+    //   window.isIos = false
+    // })
+    </script>
+    
+    <script src="https://static.swaraksha.gov.in/assets/donate.js"></script>
+    
+    
+  </body></html>
