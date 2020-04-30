@@ -1,16 +1,16 @@
 <html>
   <head>
-    <title>Aarogya Setu</title>
+    <title></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="/homepage.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='homepage.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700&amp;display=swap" rel="stylesheet">
     <style>
     body {
-    background-color: rgb(247,247,249);
-    padding:0;
-    margin:0;
+    	background-color: rgb(247,247,249);
+    	padding:0;
+    	margin:0;
     }
     </style>
   </head>
@@ -40,15 +40,19 @@
           <div class="NumberofCaseswrapper">
             <div class="totalcasesWrap flex1">
               <p class="totalcasestxt">Confirmed</p>
-              <p class="totalcasesNo redclr">23452</p> <!-- total confirmed -->
+              <p class="totalcasesNo redclr">{{ total_list.1 }}</p> <!-- total confirmed -->
+            </div>
+            <div class="totalcasesWrap flex1">
+              <p class="totalcasestxt">Active</p>
+              <p class="totalcasesNo redclr">{{ total_list.0 }}</p> <!-- total confirmed -->
             </div>
             <div class="totalcasesWrap flex1">
               <p class="totalcasestxt">Recovered</p>
-              <p class="totalcasesNo lightgreenClr">4814</p> <!-- total recovered -->
+              <p class="totalcasesNo lightgreenClr">{{ total_list.3 }}</p> <!-- total recovered -->
             </div>
             <div class="totalcasesWrap flex1">
               <p class="totalcasestxt">Deceased</p> <!-- total deceased -->
-              <p class="totalcasesNo">723</p>
+              <p class="totalcasesNo">{{ total_list.2 }}</p>
             </div>
           </div>
         </div>
@@ -60,54 +64,45 @@
             <p class="ico12 fb blackClr">Location</p>
           </div>
           <div class="statColumn"><p class="ico12 fb redclr">Confirmed</p></div>
-          <div class="statColumn dn"><p class="ico12 fb purpleclr">Quarantine</p></div>
+          <div class="statColumn"><p class="ico12 fb purpleclr">Active</p></div>
           <div class="statColumn"><p class="ico12 fb lightgreenClr">Recovered</p></div>
           <div class="statColumn"><p class="ico12 fb blackClr">Deceased</p></div>
         </div>
-        
-        {% for item in clean_list %}
-          state name : {{ item.4 }} <br>
-          active : {{ item.0 }} <br>
-          confirmed : {{ item.1 }} <br>
-          deaths : {{ item.2 }} <br>
-          recovered : {{ item.3 }} <br>
-          <br>
-        {% endfor %}
 
-        <h1>Total Case</h1>
-        Total active : {{ total_list.0 }}
-        Total confirmed :{{ total_list.1 }}
-        Total deaths : {{ total_list.2 }}
-        Total recovered : {{ total_list.3 }}
+        {% for item in clean_list %}
+        <div class="covidpopulationWrapper">
+          <div class="ratedetectionouterWrapper">
+            <div class="stateaffectWrapper">
+              <div class="locationFilter">
+                <p class="ico12 fb blackClr">{{ item.4 }}</p>
+              </div>
+              
+              <!-- confirmed -->
+              <div class="statColumn">
+                <p class="ico12 fb redclr ">{{ item.1 }}</p> <!-- total confirmed -->
+              </div>
+
+              <!-- active -->
+              <div class="statColumn">
+                <p class="ico12 fb purpleclr ">{{ item.0 }}</p> <!-- total confirmed -->
+              </div>
+
+              <!-- recovered -->
+              <div class="statColumn">
+                <p class="ico12 fb lightgreenClr">{{ item.3 }}</p> <!-- total recovered -->
+              </div>
+              
+              <!-- deceased -->
+              <div class="statColumn">
+                <p class="ico12 fb blackClr">{{ item.2}}</p> <!-- total deceased -->
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+        {% endfor %}
         
       </div>
     </div>
-    
-    
-    <script>
-    
-    function onLang() {
-    window.track("type=onLang");
-    window.JSMobileCrm.changeLanguage();
-    }
-    function onShare() {
-    window.track("type=onShare");
-    window.JSMobileCrm.shareApp();
-    }
-    
-    function track(query) {
-    var url = '/track/?path=healthyEn&ios=false&lang=en&Authorization=undefined&pt=9cf23ec2-d83c-4778-aca5-d7fb64ae1b2d&did=&ver=&' + query;
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.withCredentials = true;
-    xhr.send();
-    }
-    // document.addEventListener('DOMContentLoaded', () =>{
-    //   window.isIos = false
-    // })
-    </script>
-    
-    <script src="https://static.swaraksha.gov.in/assets/donate.js"></script>
-    
-    
-  </body></html>
+    </body></html>
